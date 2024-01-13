@@ -51,7 +51,7 @@ public class SampleJob {
 	
 	
 
-	//@Bean  (if you comment the bean then job will not execute-- is se realated kuch nhi chalega)
+	@Bean  //(if you comment the bean then job will not execute-- is se realated kuch nhi chalega)
 	public Job firstJob() {
 		return jobBuilderFactory.get("first job")
 		.incrementer(new RunIdIncrementer())		
@@ -87,6 +87,7 @@ public class SampleJob {
 		
 	}
 	
+	//isko udhar shift kiya ... bcoz of code clean rakhna hai to.. minimize kiya hai
 	/*
 	 * private Tasklet secondTask() { return new Tasklet() {
 	 * 
@@ -100,7 +101,8 @@ public class SampleJob {
 	public Job secondJob() {
 		return jobBuilderFactory.get("second job")
 		.incrementer(new RunIdIncrementer())	
-		.start(firstChunkStep())
+		.start(firstChunkStep()) //chunk oriented step 
+		.next(secondStep())  // tasklet oriented step
 		.build();
 	}
 	
